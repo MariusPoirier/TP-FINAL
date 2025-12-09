@@ -11,6 +11,9 @@ Plateau *Plateau_create() {
         plat->plate[i] = (char * )calloc(5,sizeof(char));
     }
     plat->plate[0][2] = '.';
+
+    plat->cube = Cube_create();
+
     return plat;
 }
 
@@ -19,8 +22,8 @@ void Print_plateau(Plateau *plate){
 
     assert(plate != NULL);
 
-    system("cls");
-
+    //system("cls");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     printf("-------Rok passe partout-----------\n");
     printf("------| |------\n");
     for( int i=0 ; i<4; i ++){
@@ -37,6 +40,8 @@ void Print_plateau(Plateau *plate){
         }
         printf("\n");
     }
+    printf("-----------------------------\n");
+    Cube_print(plate->cube);
     printf("-----------------------------\n");
 }
 
@@ -77,4 +82,47 @@ void Ask_add_pawn(Plateau* plate)
     }
     Add_pawn(plate, n, i, j);
 
+}
+
+void Bulid_Easy_Plateau(Plateau* plateau)
+{
+    plateau->plate[1][1] = 'b';
+    plateau->plate[2][0] = 'k';
+    plateau->plate[2][2] = 'b';
+    plateau->plate[2][3] = 'p';
+    plateau->plate[2][4] = 'd';
+    plateau->plate[3][0] = 'p';
+    plateau->plate[3][4] = 'n';
+    plateau->cube->i = 3;
+    plateau->cube->j = 4;
+
+}
+
+void Bulid_Medium_Plateau(Plateau* plateau)
+{
+    plateau->plate[1][1] = 'b';
+    plateau->plate[2][0] = 'k';
+    plateau->plate[2][2] = 'b';
+    plateau->plate[2][3] = 'p';
+    plateau->plate[2][4] = 'd';
+    plateau->plate[3][0] = 'p';
+    plateau->plate[3][4] = 'n';
+
+    plateau->cube->i = 3;
+    plateau->cube->j = 4;
+
+}
+
+void Bulid_Hard_Plateau(Plateau* plateau)
+{
+    plateau->plate[1][1] = 'b';
+    plateau->plate[2][0] = 'k';
+    plateau->plate[2][2] = 'b';
+    plateau->plate[2][3] = 'p';
+    plateau->plate[2][4] = 'd';
+    plateau->plate[3][0] = 'p';
+    plateau->plate[3][4] = 'n';
+
+    plateau->cube->i = 3;
+    plateau->cube->j = 4;
 }
