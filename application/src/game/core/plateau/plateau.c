@@ -6,7 +6,7 @@ Plateau *Plateau_create() {
     Plateau *plat = (Plateau *)calloc(1, sizeof(Plateau));
     AssertNew(plat);
 
-    plat->plate = (char ** ) calloc(4,sizeof(char));
+    plat->plate = (char ** ) calloc(4,sizeof(char*));
     for(int i=0; i<4 ; i++){
         plat->plate[i] = (char * )calloc(5,sizeof(char));
     }
@@ -29,14 +29,30 @@ void Print_plateau(Plateau *plate){
     for( int i=0 ; i<4; i ++){
         for( int j=0 ; j<5 ; j ++){
             char value = plate->plate[i][j];
-            if (value == 0)
+            if (i == 0 && j == 2)
             {
-                printf("[ ]");
+                if (value == 'n')
+                {
+                    printf("[n]");
+                }
+                else
+                {
+                printf("[.]");
+                }
             }
             else
             {
-                printf("[%c]",value);
+                if (value == 0)
+                {
+                    printf("[ ]");
+                }
+                else
+                {
+                    printf("[%c]", value);
+
+                }
             }
+            
         }
         printf("\n");
     }
@@ -86,43 +102,45 @@ void Ask_add_pawn(Plateau* plate)
 
 void Bulid_Easy_Plateau(Plateau* plateau)
 {
-    plateau->plate[1][1] = 'b';
-    plateau->plate[2][0] = 'k';
-    plateau->plate[2][2] = 'b';
-    plateau->plate[2][3] = 'p';
-    plateau->plate[2][4] = 'd';
-    plateau->plate[3][0] = 'p';
-    plateau->plate[3][4] = 'n';
+    Add_pawn(plateau, 'b', 1, 1);
+    Add_pawn(plateau, 'k', 2, 0);
+    Add_pawn(plateau, 'b', 2, 2);
+    Add_pawn(plateau, 'p', 2, 3);
+    Add_pawn(plateau, 'd', 2, 4);
+    Add_pawn(plateau, 'p', 3, 0);
+    Add_pawn(plateau, 'n', 3, 4);
     plateau->cube->i = 3;
     plateau->cube->j = 4;
-
+    Set_Cube_East(plateau->cube);
 }
 
 void Bulid_Medium_Plateau(Plateau* plateau)
 {
-    plateau->plate[1][1] = 'b';
-    plateau->plate[2][0] = 'k';
-    plateau->plate[2][2] = 'b';
-    plateau->plate[2][3] = 'p';
-    plateau->plate[2][4] = 'd';
-    plateau->plate[3][0] = 'p';
-    plateau->plate[3][4] = 'n';
+    Add_pawn(plateau, 'b', 1, 1);
+    Add_pawn(plateau, 'k', 2, 0);
+    Add_pawn(plateau, 'b', 2, 2);
+    Add_pawn(plateau, 'p', 2, 3);
+    Add_pawn(plateau, 'd', 2, 4);
+    Add_pawn(plateau, 'p', 3, 0);
+    Add_pawn(plateau, 'n', 3, 4);
 
     plateau->cube->i = 3;
     plateau->cube->j = 4;
+    Set_Cube_East(plateau->cube);
 
 }
 
 void Bulid_Hard_Plateau(Plateau* plateau)
 {
-    plateau->plate[1][1] = 'b';
-    plateau->plate[2][0] = 'k';
-    plateau->plate[2][2] = 'b';
-    plateau->plate[2][3] = 'p';
-    plateau->plate[2][4] = 'd';
-    plateau->plate[3][0] = 'p';
-    plateau->plate[3][4] = 'n';
+    Add_pawn(plateau, 'b', 1, 1);
+    Add_pawn(plateau, 'k', 2, 0);
+    Add_pawn(plateau, 'b', 2, 2);
+    Add_pawn(plateau, 'p', 2, 3);
+    Add_pawn(plateau, 'd', 2, 4);
+    Add_pawn(plateau, 'p', 3, 0);
+    Add_pawn(plateau, 'n', 3, 4);
 
     plateau->cube->i = 3;
     plateau->cube->j = 4;
+    Set_Cube_East(plateau->cube);
 }
