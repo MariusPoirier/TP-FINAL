@@ -8,6 +8,8 @@ typedef struct Plateau
 {
     char **plate;
 
+    Cube *cube;
+
 } Plateau;
 
 /// @brief Crée un plateau.
@@ -36,3 +38,20 @@ void Add_pawn(Plateau * plate, char value, int i, int j);
 /// @param plate le plateau de jeu.
 /// @return rien
 void Ask_add_pawn(Plateau* plate);
+
+/// @brief Crée un plateau de jeu facile.
+/// 
+/// @param plate le plateau de jeu.
+void Bulid_Easy_Plateau(Plateau* plateau);
+
+/// @brief Crée un plateau de jeu moyen.
+/// 
+/// @param plate le plateau de jeu.
+void Bulid_Medium_Plateau(Plateau* plateau);
+
+/// @brief Crée un plateau de jeu difficile.
+/// 
+/// @param plate le plateau de jeu.
+void Bulid_Hard_Plateau(Plateau* plateau);
+
+
