@@ -112,12 +112,12 @@ void Set_Cube_North(Cube* cube)
     Cube_rota_right(cube);
 }
 
-void Set_Cube_Left(Cube* cube)
+void Set_Cube_West(Cube* cube)
 {
     Cube_rota_left(cube);
 }
 
-void Set_Cube_Right(Cube* cube)
+void Set_Cube_East(Cube* cube)
 {
     Cube_rota_right(cube);
 }
