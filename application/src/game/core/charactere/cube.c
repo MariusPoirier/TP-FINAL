@@ -5,15 +5,16 @@ Face* Face_create(int code)
     Face* p = (Face*)calloc(1, sizeof(Face));
     p->code = code;
     return p;
-    
+
 }
-Cube *Cube_create()
+
+Cube* Cube_create()
 {
 
-    Cube *cube = (Cube *)calloc(1, sizeof(Cube));
+    Cube* cube = (Cube*)calloc(1, sizeof(Cube));
     AssertNew(cube);
 
-    
+
     cube->under = Face_create(1);
     cube->right = Face_create(2);
     cube->left = Face_create(3);
@@ -22,8 +23,8 @@ Cube *Cube_create()
     cube->over = Face_create(6);
 
 
-    cube->has_hache=false;
-    cube->has_key=false;
+    cube->has_hache = false;
+    cube->has_key = false;
 
     return cube;
 }
@@ -61,6 +62,7 @@ void Cube_left(Cube* cube)
     cube->left = cube->over;
     cube->over = cube->right;
     cube->right = temp;
+    cube->j -= 1;
 }
 
 void Cube_behind(Cube* cube)
@@ -70,6 +72,7 @@ void Cube_behind(Cube* cube)
     cube->behind = cube->over;
     cube->over = cube->front;
     cube->front = temp;
+    cube->i -= 1;
 
 }
 void Cube_right(Cube* cube)
@@ -79,6 +82,7 @@ void Cube_right(Cube* cube)
     cube->right = cube->over;
     cube->over = cube->left;
     cube->left = temp;
+    cube->j += 1;
 
 }
 void Cube_front(Cube* cube)
@@ -88,12 +92,47 @@ void Cube_front(Cube* cube)
     cube->front = cube->over;
     cube->over = cube->behind;
     cube->behind = temp;
+    cube->i += 1;
 
 }
-bool Has_Hache(Cube *self){
+
+int getCubeI(Cube* cube)
+{
+    return cube->i;
+}
+
+int getCubeJ(Cube* cube)
+{
+    return cube->j;
+}
+
+void Set_Cube_North(Cube* cube)
+{
+    Cube_rota_right(cube);
+    Cube_rota_right(cube);
+}
+
+void Set_Cube_Left(Cube* cube)
+{
+    Cube_rota_left(cube);
+}
+
+void Set_Cube_Right(Cube* cube)
+{
+    Cube_rota_right(cube);
+}
+
+void Set_Cube_South(Cube* cube)
+{
+    // South = default
+}
+
+bool Has_Hache(Cube* self)
+{
     return (self->has_hache);
 }
 
-bool Has_Key(Cube *self){
+bool Has_Key(Cube* self)
+{
     return (self->has_key);
 }
