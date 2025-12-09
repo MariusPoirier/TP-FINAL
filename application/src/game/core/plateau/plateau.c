@@ -6,11 +6,11 @@ Plateau *Plateau_create() {
     Plateau *plat = (Plateau *)calloc(1, sizeof(Plateau));
     AssertNew(plat);
 
-    plat->plate = (int ** ) calloc(5,sizeof(char));
-    for(int i=0; i<5 ; i++){
-        plat->plate[i] = (int * )calloc(4,sizeof(char));
+    plat->plate = (char ** ) calloc(4,sizeof(char));
+    for(int i=0; i<4 ; i++){
+        plat->plate[i] = (char * )calloc(5,sizeof(char));
     }
-
+    plat->plate[0][2] = '.';
     return plat;
 }
 
@@ -19,10 +19,62 @@ void Print_plateau(Plateau *plate){
 
     assert(plate != NULL);
 
-    for( int i=0 ; i<5; i ++){
-        for( int j=0 ; j<4 ; j ++){
-            printf("%c",plate->plate[i][j]);
+    system("cls");
+
+    printf("-------Rok passe partout-----------\n");
+    printf("------| |------\n");
+    for( int i=0 ; i<4; i ++){
+        for( int j=0 ; j<5 ; j ++){
+            char value = plate->plate[i][j];
+            if (value == 0)
+            {
+                printf("[ ]");
+            }
+            else
+            {
+                printf("[%c]",value);
+            }
         }
         printf("\n");
     }
+    printf("-----------------------------\n");
+}
+
+void Add_pawn(Plateau* plate,char value, int i, int j)
+{
+
+    assert(plate != NULL || value != 'n' || value != 'p' || value != 'b' || value != 'k' || value != 'd' || value != 'h' || value != 'f' || i < 0 || i>4 || j < 0 || j>5);
+
+    plate->plate[i][j] = value;
+}
+
+void Ask_add_pawn(Plateau* plate)
+{
+    char n;
+    int i, j;
+    do
+    {
+        printf("Quel pion voulez vous ajouter (n = nain, p = pilier, b = boite, k = key, d = diamant, h = hache , f = fantome )\n");
+        scanf(" %c", &n);
+    } while (n != 'n' && n != 'p' && n != 'b' && n != 'k' && n != 'd' && n != 'h' && n != 'f');
+
+    do
+    {
+        printf("A quelle ligne ? (0-3)\n");
+        scanf(" %d", &i);
+    } while (i < 0 || i > 3);
+
+    do
+    {
+        printf("A quelle colonne ? (0-4)\n");
+        scanf(" %d", &j);
+    } while (j < 0 || j > 4);
+
+    if (plate->plate[i][j] != 0)
+    {
+        printf("Case déjà occupée !\n");
+        return;
+    }
+    Add_pawn(plate, n, i, j);
+
 }
