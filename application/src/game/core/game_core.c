@@ -13,7 +13,6 @@ void GameCore_Start()
     printf("Voulez vous commencez ? (Yes : y ou No : n)\n");
     char val;
     scanf("%c", &val);
-
     if (val == 'y')
     {
         printf("C'est parti !\n");
@@ -152,7 +151,7 @@ bool GameCore_CanPlay(Plateau* plateau, char direction , int i, int j)
     switch (direction)
     {
     case 'z':
-        futur_code = plateau->cube->over->code;
+        futur_code = plateau->cube->behind->code;
         break;
     case 's':
         futur_code = plateau->cube->front->code;
@@ -166,7 +165,7 @@ bool GameCore_CanPlay(Plateau* plateau, char direction , int i, int j)
     }
     if (i > 3 || i < 0 || j > 4 || j < 0)
     {
-        printf("torlolo");
+        //printf("torlolo");
         return false;
     }
     if (plateau->plate[i][j] == 'd') // on tombe sur un diamans
@@ -183,6 +182,17 @@ bool GameCore_CanPlay(Plateau* plateau, char direction , int i, int j)
         {
             plateau->cube->has_key = true;
             plateau->plate[i][j] = 0;
+            return true;
+        }
+        return false;
+    }
+    if (plateau->plate[i][j] == 'h') // on tombe sur le fantôme
+    {
+        if (futur_code == 2)
+        {
+            plateau->cube->has_hache = true;
+            plateau->plate[i][j] = 0;
+            Delete_pawn(plateau, 'f');
             return true;
         }
         return false;
