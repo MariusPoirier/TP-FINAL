@@ -33,6 +33,13 @@ void Print_plateau(Plateau *plate);
 /// @return booléen si le pion à été ajouté True si ajouté , False sinon.
 void Add_pawn(Plateau * plate, char value, int i, int j);
 
+/// @brief Supprime un pion sur le plateau en cas de doublon, les supprime tous
+/// 
+/// @param plate le plateau de jeu.
+/// @param value le pion à ajouter (n = nain, p = pilier, b = boite, k = key, d = diamant, h = hache , f = fantome ).
+/// @return booléen si le pion à été ajouté True si ajouté , False sinon.
+void Delete_pawn(Plateau* plate, char value);
+
 /// @brief Demande à l'utilisateur d'ajouter un pion sur le plateau
 /// 
 /// @param plate le plateau de jeu.
