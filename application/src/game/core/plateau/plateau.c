@@ -69,6 +69,20 @@ void Add_pawn(Plateau* plate,char value, int i, int j)
     plate->plate[i][j] = value;
 }
 
+void Delete_pawn(Plateau* plate, char value)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if (plate->plate[i][j] == value)
+            {
+                plate->plate[i][j] = 0;
+            }
+        }
+    }
+}
+
 void Ask_add_pawn(Plateau* plate)
 {
     char n;
@@ -116,17 +130,20 @@ void Bulid_Easy_Plateau(Plateau* plateau)
 
 void Bulid_Medium_Plateau(Plateau* plateau)
 {
-    Add_pawn(plateau, 'b', 1, 1);
-    Add_pawn(plateau, 'k', 2, 0);
-    Add_pawn(plateau, 'b', 2, 2);
-    Add_pawn(plateau, 'p', 2, 3);
-    Add_pawn(plateau, 'd', 2, 4);
-    Add_pawn(plateau, 'p', 3, 0);
-    Add_pawn(plateau, 'n', 3, 4);
+    Add_pawn(plateau, 'd', 0, 1);
+    Add_pawn(plateau, 'n', 0, 3);
+    Add_pawn(plateau, 'd', 1, 0);
+    Add_pawn(plateau, 'h', 1, 1);
+    Add_pawn(plateau, 'f', 1, 2);
+    Add_pawn(plateau, 'p', 1, 3);
+    Add_pawn(plateau, 'b', 2, 0);
+    Add_pawn(plateau, 'k', 2, 3);
+    Add_pawn(plateau, 'p', 3, 1);
+    Add_pawn(plateau, 'b', 3, 3);
 
-    plateau->cube->i = 3;
-    plateau->cube->j = 4;
-    Set_Cube_East(plateau->cube);
+    plateau->cube->i = 0;
+    plateau->cube->j = 3;
+    Set_Cube_West(plateau->cube);
 
 }
 
