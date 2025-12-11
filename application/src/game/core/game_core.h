@@ -9,7 +9,8 @@
 #include "settings.h"
 #include "plateau/plateau.h"
 
-#define GAME_GRID_SIZE 5
+#define GAME_GRID_SIZE_X 5
+#define GAME_GRID_SIZE_Y 4
 
 typedef struct GameCore
 {
