@@ -4,7 +4,7 @@
 #include "../character/cube.h"
 
 typedef enum Cell_Value
-{ NOTHING, BOX, PILLAR, DIAMOND, DOWN_AXE, DOWN_KEY, END}Cell_Value;
+{ NOTHING, BOX, PILLAR, DIAMOND, DOWN_AXE, DOWN_KEY,GHOST, END}Cell_Value;
 
 typedef struct Cell
 {
@@ -34,3 +34,4 @@ Plateau Plateau_1();
 /// @return L'affichage du tableau.
 void Print_plateau(Plateau plateau);
 
+void Plateau_update(Plateau *plateau);

@@ -5,7 +5,7 @@ Cube Cube_create()
 
     Cube cube;
 
-    cube.under = Key_Hole;
+    cube.under = KEY_HOLE;
     cube.right = AXE;
     cube.left = SHIELD;
     cube.behind = BACKPACK;

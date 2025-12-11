@@ -24,13 +24,19 @@ Plateau Plateau_1()
     Plateau plateau = Plateau_create();
 
     plateau.cube.i = 3;
-    plateau.cube.j = 2;
+    plateau.cube.j = 0;
     plateau.board[2][0].value = PILLAR;
     plateau.board[2][1].value = PILLAR;
     plateau.board[2][2].value = PILLAR;
     plateau.board[2][3].value = PILLAR;
-    plateau.board[2][4].value = DOWN_KEY;
+    //plateau.board[2][4].value = DOWN_KEY;
     plateau.board[1][3].value = PILLAR;
+    plateau.board[3][4].value = DOWN_KEY;
+    plateau.board[3][1].value = DOWN_AXE;
+    plateau.board[0][0].value = GHOST;
+
+
+
     return plateau;
 }
 
@@ -69,6 +75,9 @@ void Print_plateau(Plateau plateau)
                 case DOWN_AXE:
                     printf("  axe   ");
                     break;
+                case GHOST:
+                    printf(" ghost  ");
+                    break;
                 default:
                     printf("///////");
                     break;
@@ -76,5 +85,20 @@ void Print_plateau(Plateau plateau)
             }
         }
         printf("\n");
+    }
+}
+
+void Plateau_update(Plateau* plateau)
+{
+    // Il faur remove clé hache et fantôme;
+    if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_KEY)
+    {
+        plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
+        plateau->cube.key == true;
+    }
+    if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_AXE)
+    {
+        plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
+        plateau->cube.axe == true;
     }
 }

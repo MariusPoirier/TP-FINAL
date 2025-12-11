@@ -2,7 +2,7 @@
 
 #include "settings.h"
 typedef enum Face_Value
-{ Key_Hole, AXE, SHIELD, BACKPACK, FACE, HEAD }
+{ KEY_HOLE, AXE, SHIELD, BACKPACK, FACE, HEAD }
 Face_Value;
 
 
@@ -29,7 +29,7 @@ typedef struct Cube
 /// 
 /// @param face la face sur lequel le dé doit être.
 /// @return Le cube créée.
-Cube* Cube_create();
+Cube Cube_create();
 
 void Cube_print(Cube cube);
 
@@ -62,4 +62,3 @@ bool Cube_axe(Cube self);
 /// @param self le cube que l'on veut.
 /// @return booléen pour savoir si le cube à la clé.
 bool Cube_key(Cube self);
-
