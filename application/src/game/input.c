@@ -125,6 +125,14 @@ void Input_beforeEventLoop(Input* self)
     {
         PlayerInput* playerInput = &(self->players[i]);
         playerInput->validatePressed = false;
+        playerInput->up_pressed = false;
+        playerInput->down_pressed = false;
+        playerInput->left_pressed = false;
+        playerInput->right_pressed = false;
+        playerInput->rotate_right_pressed = false;
+        playerInput->rotate_left_pressed = false;
+        playerInput->space_pressed = false;
+
     }
 }
 
@@ -223,15 +231,38 @@ void Input_processKeyDown(Input* self, PlayerInput* playerInput, bool repeat, in
         self->quitPressed = true;
         break;
     case SDL_SCANCODE_UP:
+        playerInput->up_pressed = true;
         break;
     case SDL_SCANCODE_DOWN:
+        playerInput->down_pressed = true;
         break;
     case SDL_SCANCODE_LEFT:
+        playerInput->left_pressed = true;
         break;
     case SDL_SCANCODE_RIGHT:
+        playerInput->right_pressed = true;
         break;
     case SDL_SCANCODE_SPACE:
         playerInput->validatePressed = true;
+        playerInput->space_pressed = true;
+        break;
+    case SDL_SCANCODE_Q:
+        playerInput->rotate_left_pressed = true;
+        break;
+    case SDL_SCANCODE_W:
+        playerInput->up_pressed = true;
+        break;
+    case SDL_SCANCODE_E:
+        playerInput->rotate_right_pressed = true;
+        break;
+    case SDL_SCANCODE_A:
+        playerInput->left_pressed = true;
+        break;
+    case SDL_SCANCODE_S:
+        playerInput->down_pressed = true;
+        break;
+    case SDL_SCANCODE_D:
+        playerInput->right_pressed = true;
         break;
     case SDL_SCANCODE_RETURN:
         break;
