@@ -125,7 +125,7 @@ void Bulid_Easy_Plateau(Plateau* plateau)
     Add_pawn(plateau, 'n', 3, 4);
     plateau->cube->i = 3;
     plateau->cube->j = 4;
-    Set_Cube_East(plateau->cube);
+    Cube_Set_East(plateau->cube);
 }
 
 void Bulid_Medium_Plateau(Plateau* plateau)
@@ -143,7 +143,7 @@ void Bulid_Medium_Plateau(Plateau* plateau)
 
     plateau->cube->i = 0;
     plateau->cube->j = 3;
-    Set_Cube_West(plateau->cube);
+    Cube_Set_West(plateau->cube);
 
 }
 
@@ -159,5 +159,5 @@ void Bulid_Hard_Plateau(Plateau* plateau)
 
     plateau->cube->i = 3;
     plateau->cube->j = 4;
-    Set_Cube_East(plateau->cube);
+    Cube_Set_West(plateau->cube);
 }
