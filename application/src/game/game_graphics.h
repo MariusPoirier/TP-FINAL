@@ -12,7 +12,9 @@
 
 typedef struct Scene Scene;
 
-#define GAME_GRID_SIZE 5
+#define GAME_GRID_SIZE_X 7
+#define GAME_GRID_SIZE_Y 6
+
 
 /// @brief Structure représentant la scène du menu principal du jeu.
 typedef struct GameGraphics
@@ -22,12 +24,27 @@ typedef struct GameGraphics
     Vec2 m_padding;
     Vec2 m_spacing;
 
-    AABB m_cells[GAME_GRID_SIZE][GAME_GRID_SIZE];
+    AABB m_cells[GAME_GRID_SIZE_Y][GAME_GRID_SIZE_X];
+
+    /*
+    AABB m_cells_2[1][3];
+    AABB m_gridAABB_2; 
+    */
 
     int m_selectedRowIndex;
     int m_selectedColIndex;
 
-    SpriteGroup* m_spriteRabbit;
+    SpriteGroup* m_spriteBox;
+    SpriteGroup* m_spriteKey;
+    SpriteGroup* m_spriteFantome;
+    SpriteGroup* m_spritePillier;
+    SpriteGroup* m_spriteHache;
+    SpriteGroup* m_spriteDiamond;
+    SpriteGroup* m_spriteNain;
+    SpriteGroup* m_spriteStone;
+    SpriteGroup* m_spriteDoor;
+
+    Plateau* plateau;
 
     bool m_enabled;
 } GameGraphics;
