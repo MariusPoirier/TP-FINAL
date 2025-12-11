@@ -83,7 +83,6 @@ void Cube_right(Cube* cube)
     cube->over = cube->left;
     cube->left = temp;
     cube->j += 1;
-
 }
 void Cube_front(Cube* cube)
 {
@@ -96,33 +95,33 @@ void Cube_front(Cube* cube)
 
 }
 
-int getCubeI(Cube* cube)
+int Cube_GetI(Cube* cube)
 {
     return cube->i;
 }
 
-int getCubeJ(Cube* cube)
+int Cube_GetJ(Cube* cube)
 {
     return cube->j;
 }
 
-void Set_Cube_North(Cube* cube)
+void Cube_Set_North(Cube* cube)
 {
     Cube_rota_right(cube);
     Cube_rota_right(cube);
 }
 
-void Set_Cube_West(Cube* cube)
+void Cube_Set_West(Cube* cube)
 {
     Cube_rota_left(cube);
 }
 
-void Set_Cube_East(Cube* cube)
+void Cube_Set_East(Cube* cube)
 {
     Cube_rota_right(cube);
 }
 
-void Set_Cube_South(Cube* cube)
+void Cube_Set_South(Cube* cube)
 {
     // South = default
 }
