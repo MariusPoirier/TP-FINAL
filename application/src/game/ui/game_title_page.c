@@ -22,7 +22,7 @@ static void GameTitlePage_onClick(void* selectable)
     printf("Button clicked: %s\n", UIObject_getObjectName(selectable));
 }
 
-GameTitlePage* GameTitlePage_create(Scene* scene, GameUIManager *manager)
+GameTitlePage* GameTitlePage_create(Scene* scene, GameUIManager* manager)
 {
     UICanvas* canvas = manager->m_canvas;
     AssetManager* assets = Scene_getAssetManager(scene);
