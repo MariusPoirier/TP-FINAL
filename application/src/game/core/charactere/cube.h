@@ -52,13 +52,13 @@ void Cube_behind(Cube* cube);
 void Cube_right(Cube* cube);
 void Cube_front(Cube* cube);
 
-int getCubeI(Cube* cube);
-int getCubeJ(Cube* cube);
+int Cube_GetI(Cube* cube);
+int Cube_GetJ(Cube* cube);
 
-void Set_Cube_North(Cube* cube);
-void Set_Cube_South(Cube* cube);
-void Set_Cube_East(Cube* cube);
-void Set_Cube_West(Cube* cube);
+void Cube_Set_North(Cube* cube);
+void Cube_Set_South(Cube* cube);
+void Cube_Set_East(Cube* cube);
+void Cube_Set_South(Cube* cube);
 
 
 /// @brief Dis si le cube à la hache.
