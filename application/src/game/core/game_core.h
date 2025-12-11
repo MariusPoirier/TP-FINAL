@@ -24,10 +24,10 @@ void GameCore_Start();
 void GameCore_Create();
 
 /// @brief Un tour de jeu.
-void GameCore_update(Plateau* plateau);
+void GameCore_update(Plateau plateau);
 
 /// @brief initialise un tour.
-void GameCore_Init_turn(Plateau* plateau);
+void GameCore_Init_turn(Plateau plateau);
 
 /// @brief Vérifie si un déplacement est possible
 /// @param plateau Le plateau de jeu
@@ -36,19 +36,19 @@ void GameCore_Init_turn(Plateau* plateau);
 /// @param direction La direction du déplacement
 /// 
 /// @return True si le déplacement est possible, False sinon
-bool GameCore_CanPlay(Plateau* plateau,char directtion , int i ,int j);
+bool GameCore_CanPlay(Plateau plateau,char directtion , int i ,int j);
 
 /// @brief Vérifie si notre personnage peut tourner
 /// @param plateau Le plateau de jeu
 ///
 /// @return True si la rotation est possible, False sinon
-bool GameCore_CanRotate(Plateau* plateau);
+bool GameCore_CanRotate(Plateau plateau);
 
 /// @brief Vérifie si on peut finir la partie
 /// @param plateau Le plateau de jeu
 ///
 /// @return True si la fin est possible, False sinon
-bool GameCore_CanFinish(Plateau* plateau);
+bool GameCore_CanFinish(Plateau plateau);
 
 /// @brief Finis le jeu.
 void GameCore_Finish();
