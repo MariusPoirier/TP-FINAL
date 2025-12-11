@@ -12,6 +12,13 @@
 typedef struct PlayerInput
 {
     bool validatePressed;
+    bool up_pressed;
+    bool down_pressed;
+    bool left_pressed;
+    bool right_pressed;
+    bool rotate_right_pressed;
+    bool rotate_left_pressed;
+    bool space_pressed;
 } PlayerInput;
 
 typedef struct DebugInput
