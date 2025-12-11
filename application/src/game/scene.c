@@ -131,9 +131,11 @@ void Scene_render(Scene* self)
     SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, 255);
     SDL_RenderClear(g_renderer);
 
-    SDL_Color bgColor = g_colors.gray9;
+    // Background
+    SDL_Color bgColor = g_colors.black;
     SDL_SetRenderDrawColor(g_renderer, bgColor.r, bgColor.g, bgColor.b, 255);
     SDL_RenderFillRect(g_renderer, NULL);
+
 
     GameUIManager_render(self->m_uiManager);
 
@@ -151,7 +153,7 @@ void Scene_render(Scene* self)
         {
             opacity = 255 - opacity;
         }
-        SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, opacity);
+        SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, opacity);
         SDL_RenderFillRect(g_renderer, NULL);
     }
 }
