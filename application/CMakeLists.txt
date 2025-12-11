@@ -31,6 +31,8 @@ target_sources(${NAME} PRIVATE
     "src/game/ui/game_title_page.h"
     "src/game/ui/game_settings_page.c"
     "src/game/ui/game_settings_page.h"
+    "src/game/ui/game_ui_game.c"
+    "src/game/ui/game_ui_game.h"
     "src/game/core/charactere/cube.c"
     "src/game/core/charactere/cube.h"
     "src/game/core/plateau/plateau.c"
