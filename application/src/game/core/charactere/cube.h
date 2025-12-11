@@ -26,7 +26,7 @@ typedef struct Cube
     bool has_hache;
     bool has_key;
 
-    int i,j;
+    int i, j;
 
 } Cube;
 
@@ -40,7 +40,7 @@ Face* Face_create(int code);
 /// 
 /// @param face la face sur lequel le dé doit être.
 /// @return Le cube créée.
-Cube* Cube_create();
+Cube Cube_create();
 
 void Cube_print(Cube* cube);
 
