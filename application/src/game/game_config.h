@@ -22,3 +22,7 @@ typedef struct GameConfig
 void GameConfig_init();
 
 extern GameConfig g_gameConfig;
+
+void GameConfig_Init_turn(Plateau* plateau);
+
+void GameConfig_update(Plateau* plateau);
