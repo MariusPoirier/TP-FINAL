@@ -3,12 +3,12 @@
 Face* Face_create(int code)
 {
     Face* p = (Face*)calloc(1, sizeof(Face));
-    p->code = code;
+    p.code = code;
     return p;
 
 }
 
-Cube* Cube_create()
+Cube Cube_create()
 {
 
     Cube* cube = (Cube*)calloc(1, sizeof(Cube));
