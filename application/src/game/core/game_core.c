@@ -105,8 +105,7 @@ void GameCore_update(Plateau* plateau)
         a = GameCore_CanPlay(plateau,'d', plateau->cube->i, plateau->cube->j + 1);
         if (a == 1)
         {
-            plateau->plate[plateau->cube->i][plateau->cube->j] = 0;
-            plateau->plate[plateau->cube->i][plateau->cube->j + 1] = 'n';
+            
             Cube_right(plateau->cube);
         }
         // Déplacement vers la droite
@@ -163,6 +162,7 @@ bool GameCore_CanPlay(Plateau* plateau, char direction , int i, int j)
         futur_code = plateau->cube->right->code;
         break;
     }
+
     if (i > 3 || i < 0 || j > 4 || j < 0)
     {
         //printf("torlolo");
@@ -170,7 +170,7 @@ bool GameCore_CanPlay(Plateau* plateau, char direction , int i, int j)
     }
     if (plateau->plate[i][j] == 'd') // on tombe sur un diamans
     {
-        if (plateau->cube->under->code == 1 && plateau->cube->has_key == false)
+        if (futur_code == 1 && plateau->cube->has_key == false)
         {
             return true;
         }
@@ -213,28 +213,28 @@ bool GameCore_CanRotate(Plateau* plateau)
         //vérifier qu'il y a pas de boite ('b') autour
         if (i - 1 >= 0)
         {
-            if (plateau->plate[i][j] == 'b')
+            if (plateau->plate[i-1][j] == 'b')
             {
                 return false;
             }
         }
         if (i - 1 < 4)
         {
-            if (plateau->plate[i][j] == 'b')
+            if (plateau->plate[i+1][j] == 'b')
             {
                 return false;
             }
         }
         if (j - 1 >= 0)
         {
-            if (plateau->plate[i][j] == 'b')
+            if (plateau->plate[i][j-1] == 'b')
             {
                 return false;
             }
         }
         if (j + 1 < 5)
         {
-            if (plateau->plate[i][j] == 'b')
+            if (plateau->plate[i][j+1] == 'b')
             {
                 return false;
             }
