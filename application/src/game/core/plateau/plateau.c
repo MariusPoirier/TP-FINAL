@@ -78,4 +78,3 @@ void Print_plateau(Plateau plateau)
         printf("\n");
     }
 }
-
