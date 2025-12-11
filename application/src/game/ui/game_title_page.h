@@ -21,7 +21,6 @@ typedef struct GameTitlePage
     UIObject* m_mainPanel;
 } GameTitlePage;
 
-GameTitlePage* GameTitlePage_create(Scene* scene, GameUIManager *manager);
+GameTitlePage* GameTitlePage_create(Scene* scene, GameUIManager* manager);
 void GameTitlePage_destroy(GameTitlePage* self);
 void GameTitlePage_update(GameTitlePage* self, UIInput* input);
-
