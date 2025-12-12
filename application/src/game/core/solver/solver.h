@@ -6,9 +6,8 @@
 
 typedef struct GameHashmapEntry
 {
-    Plateau prevState;
+    int id_prev;
     Plateau currState;
-    uint16_t hash;
 } GameHashmapEntry;
 
 
@@ -20,14 +19,14 @@ typedef struct GameHashmap
     size_t m_size;
 } GameHashmap;
 
-uint16_t hash_maker(Plateau* plate);
+uint16_t hash_maker(Plateau plate);
 
 
 GameHashmap *GameHashmap_create(size_t capacity);
 
 //fonction qui doit résoudre le plateau:
 
-void Solver(Plateau* plateau, size_t capacity);
+void Solver(Plateau plateau, size_t capacity);
 
 
 

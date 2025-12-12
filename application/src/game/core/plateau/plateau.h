@@ -28,6 +28,7 @@ typedef struct Plateau
 Plateau Plateau_create();
 
 Plateau Plateau_1();
+Plateau Plateau_2();
 /// @brief Affiche le plateau.
 /// 
 /// @param plate le plateau à afficher.
@@ -35,3 +36,5 @@ Plateau Plateau_1();
 void Print_plateau(Plateau plateau);
 
 void Plateau_update(Plateau *plateau);
+
+void Plateau_search_ghost(Plateau* plateau);

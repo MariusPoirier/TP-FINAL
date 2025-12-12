@@ -35,6 +35,28 @@ Plateau Plateau_1()
     plateau.board[3][1].value = DOWN_AXE;
     plateau.board[0][0].value = GHOST;
 
+    return plateau;
+}
+
+Plateau Plateau_2()
+{
+    Plateau plateau = Plateau_create();
+
+    plateau.cube.i = 0;
+    plateau.cube.j = 3;
+    Cube_SetWest(&plateau.cube);
+    plateau.board[0][1].value = DIAMOND;
+    plateau.board[1][0].value = DIAMOND;
+    plateau.board[1][1].value = DOWN_AXE;
+    plateau.board[1][2].value = GHOST;
+    plateau.board[1][3].value = PILLAR;
+    plateau.board[2][0].value = BOX;
+    plateau.board[2][3].value = DOWN_KEY;
+    plateau.board[3][1].value = PILLAR;
+    plateau.board[3][3].value = BOX;
+
+
+
 
 
     return plateau;
@@ -94,11 +116,25 @@ void Plateau_update(Plateau* plateau)
     if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_KEY)
     {
         plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
-        plateau->cube.key == true;
+        plateau->cube.key = true;
     }
     if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_AXE)
     {
         plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
-        plateau->cube.axe == true;
+        plateau->cube.axe = true;
+        Plateau_search_ghost(plateau);
     }
+}
+
+void Plateau_search_ghost(Plateau* plateau)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if (plateau->board[i][j].value == GHOST)
+                plateau->board[i][j].value = NOTHING;
+        }
+    }
+
 }
