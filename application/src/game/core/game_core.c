@@ -10,7 +10,7 @@
 void GameCore_Create()
 {
     //todo séléction
-    Plateau plateau = Plateau_1();
+    Plateau plateau = Plateau_2();
     Print_plateau(plateau);
     GameCore_Loop(plateau);
 
@@ -37,7 +37,7 @@ void GameCore_update(Plateau* plateau)
             {
                 Cube_left(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
         case 'd':
@@ -45,7 +45,7 @@ void GameCore_update(Plateau* plateau)
             {
                 Cube_right(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
         case 'z':
@@ -53,15 +53,15 @@ void GameCore_update(Plateau* plateau)
             {
                 Cube_behind(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
         case 's':
-            if (ASSERT_FRONT(*plateau))
+            if(ASSERT_FRONT(*plateau))
             {
                 Cube_front(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
         case 'a':
@@ -69,7 +69,7 @@ void GameCore_update(Plateau* plateau)
             {
                 Cube_rota_left(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
         case 'e':
@@ -77,7 +77,7 @@ void GameCore_update(Plateau* plateau)
             {
                 Cube_rota_right(&plateau->cube);
                 Print_plateau(*plateau);
-                Cube_print(plateau->cube);
+                
             }
             break;
 
@@ -96,7 +96,9 @@ bool GameCore_CanFinish(Plateau plateau)
         {
             if (Cube_key(plateau.cube) == true)
             {
+                printf("yipi");
                 return true;
+
             }
         }
     return false;
