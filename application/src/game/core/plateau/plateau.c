@@ -112,6 +112,7 @@ void Print_plateau(Plateau plateau)
 
 void Plateau_update(Plateau* plateau)
 {
+
     // Il faur remove clé hache et fantôme;
     if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_KEY)
     {
@@ -136,5 +137,17 @@ void Plateau_search_ghost(Plateau* plateau)
                 plateau->board[i][j].value = NOTHING;
         }
     }
+
+}
+
+bool Plateau_even(Plateau plateau1, Plateau plateau2)
+{
+    if (plateau1.cube.under != plateau2.cube.under) return true;
+    if (plateau1.cube.front != plateau2.cube.front) return true;
+    if (plateau1.cube.left != plateau2.cube.left) return true;
+    if (plateau1.cube.i != plateau2.cube.i) return true;
+    if (plateau1.cube.j != plateau2.cube.j) return true;
+    if (plateau1.cube.axe!= plateau2.cube.axe) return true;
+    if (plateau1.cube.key != plateau2.cube.key) return true;
 
 }
