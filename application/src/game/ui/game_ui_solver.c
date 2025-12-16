@@ -4,16 +4,18 @@
     See LICENSE.md in the project root for license information.
 */
 
-#include "game/ui/game_ui_game.h"
+#include "game/ui/game_ui_solver.h"
 #include "game/ui/game_settings_page.h"
 #include "game/ui/game_ui_manager.h"
+#include "game/core/solver/solver.h"
+#include "game/core/plateau/plateau.h"
 #include "game/scene.h"
 #include "game/game_config.h"
 #include "common/ui_style.h"
 
-static void GameUiPage_onClick(void* selectable)
+static void GameUiSolverPage_onClick(void* selectable)
 {
-    GameUiPage* self = (GameUiPage*)UISelectable_getUserData(selectable);
+    GameUiSolverPage* self = (GameUiSolverPage*)UISelectable_getUserData(selectable);
     assert(self && "self must not be NULL");
 
     int action = UISelectable_getUserId(selectable);
@@ -23,15 +25,15 @@ static void GameUiPage_onClick(void* selectable)
     printf("Button clicked: %s\n", UIObject_getObjectName(selectable));
 }
 
-static void GameUiPage_onItemChanged(void* selectable, int currItemIdx, int prevItemIdx, bool increase)
+static void GameUiSolverPage_onItemChanged(void* selectable, int currItemIdx, int prevItemIdx, bool increase)
 {
-    GameUiPage* self = (GameUiPage*)UISelectable_getUserData(selectable);
+    GameUiSolverPage* self = (GameUiSolverPage*)UISelectable_getUserData(selectable);
     assert(self && "self must not be NULL");
 
     printf("List item changed: %s\n", UIObject_getObjectName(selectable));
 }
 
-GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
+GameUiSolverPage* GameUiSolverPage_create(Scene* scene, GameUIManager* manager)
 {
     UICanvas* canvas = manager->m_canvas;
     AssetManager* assets = Scene_getAssetManager(scene);
@@ -39,7 +41,7 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     TTF_Font* font = NULL;
     char buffer[128] = { 0 };
 
-    GameUiPage* self = (GameUiPage*)calloc(1, sizeof(GameUiPage));
+    GameUiSolverPage* self = (GameUiSolverPage*)calloc(1, sizeof(GameUiSolverPage));
     AssertNew(self);
 
     self->m_scene = scene;
@@ -66,9 +68,9 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     // Title
     font = AssetManager_getFont(assets, FONT_BIG_BOLD);
     UILabel* label = UILabel_create("title-label", font);
-    UILabel_setTextString(label, "Rok Passe Parkour");
+    UILabel_setTextString(label, "Le Solver tah Lewandowski");
     UILabel_setAnchor(label, Vec2_anchor_center);
-    UILabel_setColor(label, g_colors.white);    
+    UILabel_setColor(label, g_colors.white);
     UIGridLayout_addObject(layout, label, 0, 0, 1, 1);
 
     // Niveau layout
@@ -82,15 +84,15 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     const char* toggleItems[] = { "Easy", "Medium" , "Hard" };
     const int toggleItemCount = sizeof(toggleItems) / sizeof(toggleItems[0]);
 
-    
+
     UIList* fullLevelList = UIList_create(
         "fullscreen-list", font, toggleItemCount,
-        0|1|2
+        0 | 1 | 2
     );
 
     self->m_LevelList = fullLevelList;
 
-    UIList_setLabelString(fullLevelList, "Level : ");
+    UIList_setLabelString(fullLevelList, "0");
     for (int i = 0; i < toggleItemCount; ++i)
     {
         UIList_setItemString(fullLevelList, i, toggleItems[i]);
@@ -98,7 +100,7 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     UIStyle_setDefaultList(fullLevelList, assets);
     UISelectable_setUserData(fullLevelList, self);
     UISelectable_setUserId(fullLevelList, GAME_UI_ACTION_CHANGE_FULLSCREEN);
-    UIList_setOnItemChangedCallback(fullLevelList, GameUiPage_onItemChanged);
+    UIList_setOnItemChangedCallback(fullLevelList, GameUiSolverPage_onItemChanged);
 
     SDL_WindowFlags windowFlags = SDL_GetWindowFlags(g_window);
     if (windowFlags & SDL_WINDOW_FULLSCREEN)
@@ -113,14 +115,14 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
 
     UIGridLayout_addObject(levellayout, fullLevelList, 0, 0, 1, 1);
     UIFocusManager_addSelectable(self->m_focusManager, fullLevelList);
-    
+
 
     // Button Generete level
     UIButton* levelButton = UIButton_create("level-button", font);
-    UIButton_setLabelString(levelButton, "Générer le niveau");
-    UIButton_setOnClickCallback(levelButton, GameUiPage_onClick);
+    UIButton_setLabelString(levelButton, "PRINTF");
+    UIButton_setOnClickCallback(levelButton, GameUiSolverPage_onClick);
     UISelectable_setUserData(levelButton, self);
-    UISelectable_setUserId(levelButton, GAME_UI_ACTION_APPLY_LEVEL);
+    UISelectable_setUserId(levelButton, GAME_UI_ACTION_SHOW_SOLUTION);
     UIStyle_setDefaultButton(levelButton);
 
     UIGridLayout_addObject(levellayout, levelButton, 0, 1, 1, 1);
@@ -134,22 +136,22 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     UIGridLayout_addObject(layout, buttonlayout, 3, 0, 1, 1);
 
     // Resoudre button
-    UIButton* solveButton = UIButton_create("solve-button", font);
-    UIButton_setLabelString(solveButton, "Résoudre");
-    UIButton_setOnClickCallback(solveButton, GameUiPage_onClick);
+    UIButton* solveButton = UIButton_create("previous-button", font);
+    UIButton_setLabelString(solveButton, "Coup précédent");
+    UIButton_setOnClickCallback(solveButton, GameUiSolverPage_onClick);
     UISelectable_setUserData(solveButton, self);
-    UISelectable_setUserId(solveButton, GAME_UI_ACTION_SHOW_SOLUTION);
+    UISelectable_setUserId(solveButton, GAME_UI_ACTION_PREV_STEP);
     UIStyle_setDefaultButton(solveButton);
 
     UIGridLayout_addObject(buttonlayout, solveButton, 0, 0, 1, 1);
     UIFocusManager_addSelectable(self->m_focusManager, solveButton);
 
     // Generate button
-    UIButton* generateButton = UIButton_create("generate-button", font);
-    UIButton_setLabelString(generateButton, "Générer");
-    UIButton_setOnClickCallback(generateButton, GameUiPage_onClick);
+    UIButton* generateButton = UIButton_create("next-button", font);
+    UIButton_setLabelString(generateButton, "Coup suivant");
+    UIButton_setOnClickCallback(generateButton, GameUiSolverPage_onClick);
     UISelectable_setUserData(generateButton, self);
-    UISelectable_setUserId(generateButton, GAME_UI_ACTION_GENERATE_LEVEL);
+    UISelectable_setUserId(generateButton, GAME_UI_ACTION_NEXT_STEP);
     UIStyle_setDefaultButton(generateButton);
 
     UIGridLayout_addObject(buttonlayout, generateButton, 0, 1, 1, 1);
@@ -159,7 +161,7 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
 
     UIButton* backButton = UIButton_create("back-button", font);
     UIButton_setLabelString(backButton, "Back");
-    UIButton_setOnClickCallback(backButton, GameUiPage_onClick);
+    UIButton_setOnClickCallback(backButton, GameUiSolverPage_onClick);
     UISelectable_setUserData(backButton, self);
     UISelectable_setUserId(backButton, GAME_UI_ACTION_QUIT);
     UIStyle_setDefaultButton(backButton);
@@ -171,7 +173,7 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
     return self;
 }
 
-void GameUiPage_destroy(GameUiPage* self)
+void GameUiSolverPage_destroy(GameUiSolverPage* self)
 {
     if (!self) return;
 
@@ -181,7 +183,7 @@ void GameUiPage_destroy(GameUiPage* self)
     free(self);
 }
 
-void GameUiPage_update(GameUiPage* self, UIInput* input)
+void GameUiSolverPage_update(GameUiSolverPage* self, UIInput* input)
 {
     UIFocusManager_update(self->m_focusManager, input);
 
@@ -190,16 +192,27 @@ void GameUiPage_update(GameUiPage* self, UIInput* input)
     case GAME_UI_ACTION_OPEN_MAIN:
         self->m_manager->m_nextAction = GAME_UI_ACTION_OPEN_MAIN;
         break;
-    case GAME_UI_ACTION_SHOW_SOLUTION:
-        self->m_manager->m_nextAction = GAME_UI_ACTION_SHOW_SOLUTION;
-        break;
     case GAME_UI_ACTION_QUIT:
-        self->m_manager->m_nextAction = GAME_UI_ACTION_OPEN_MAIN;
+        self->m_manager->m_nextAction = GAME_UI_ACTION_START;
         break;
+    case GAME_UI_ACTION_PREV_STEP:
+        printf("Previous step\n");
+        self->m_scene->m_gameGraphics->m_selectedColIndex += 1;
+        break;
+    case GAME_UI_ACTION_NEXT_STEP:
+        printf("Next step\n");
+        self->m_scene->m_gameGraphics->m_selectedColIndex -= 1;
+        break;
+    case GAME_UI_ACTION_SHOW_SOLUTION:
+        GameHashmap *hash_map = GameHashmap_create(10000);
+        Solver(self->m_scene->m_gameGraphics->plateau, hash_map->m_capacity);
 
+        printf("Le nombre de coup est de : %d \n", hash_map->m_size);
+        printf("Generate level button clicked\n");
+        break;
     case GAME_UI_ACTION_APPLY_LEVEL:
     {
-        
+
         int itemIndex = UIList_getSelectedItem(self->m_LevelList);
         printf("Selected level difficulty: %d\n", itemIndex);
         if (itemIndex == 0)

@@ -67,7 +67,7 @@ GameSettingsPage* GameSettingsPage_create(Scene* scene, GameUIManager* manager)
     UILabel* label = UILabel_create("title-label", font);
     UILabel_setTextString(label, "Settings");
     UILabel_setAnchor(label, Vec2_anchor_center);
-    UILabel_setColor(label, g_colors.orange2);
+    UILabel_setColor(label, g_colors.white);
     UIGridLayout_addObject(layout, label, 0, 0, 1, 1);
 
     font = AssetManager_getFont(assets, FONT_NORMAL);

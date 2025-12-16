@@ -26,7 +26,7 @@ void Cube_print(Cube cube)
         , cube.under, cube.over, cube.left, cube.behind, cube.right, cube.front);
 }
 
-void Cube_rota_right(Cube *cube)
+void Cube_rota_right(Cube* cube)
 {
     Face_Value temp = cube->left;
     cube->left = cube->behind;
@@ -36,7 +36,7 @@ void Cube_rota_right(Cube *cube)
 
 }
 
-void Cube_rota_left(Cube *cube)
+void Cube_rota_left(Cube* cube)
 {
     Face_Value temp = cube->left;
     cube->left = cube->front;
@@ -46,7 +46,7 @@ void Cube_rota_left(Cube *cube)
 
 }
 
-void Cube_left(Cube *cube)
+void Cube_left(Cube* cube)
 {
     Face_Value temp = cube->under;
     cube->under = cube->left;
@@ -56,7 +56,7 @@ void Cube_left(Cube *cube)
     cube->j -= 1;
 }
 
-void Cube_behind(Cube *cube)
+void Cube_behind(Cube* cube)
 {
     Face_Value temp = cube->under;
     cube->under = cube->behind;
@@ -66,7 +66,7 @@ void Cube_behind(Cube *cube)
     cube->i -= 1;
 
 }
-void Cube_right(Cube *cube)
+void Cube_right(Cube* cube)
 {
     Face_Value temp = cube->under;
     cube->under = cube->right;
@@ -76,7 +76,7 @@ void Cube_right(Cube *cube)
     cube->j += 1;
 
 }
-void Cube_front(Cube *cube)
+void Cube_front(Cube* cube)
 {
     Face_Value temp = cube->under;
     cube->under = cube->front;
@@ -97,23 +97,23 @@ int getCubeJ(Cube cube)
     return cube.j;
 }
 
-void Cube_SetNorth(Cube *cube)
+void Cube_SetNorth(Cube* cube)
 {
     Cube_rota_right(cube);
     Cube_rota_right(cube);
 }
 
-void Cube_SetWest(Cube *cube)
+void Cube_SetWest(Cube* cube)
 {
     Cube_rota_left(cube);
 }
 
-void Cube_SetEast(Cube *cube)
+void Cube_SetEast(Cube* cube)
 {
     Cube_rota_right(cube);
 }
 
-void Cube_SetSouth(Cube *cube)
+void Cube_SetSouth(Cube* cube)
 {
     // South = default
 }

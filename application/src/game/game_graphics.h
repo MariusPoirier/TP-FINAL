@@ -12,8 +12,8 @@
 
 typedef struct Scene Scene;
 
-#define GAME_GRID_SIZE_X 7
-#define GAME_GRID_SIZE_Y 6
+#define GAME_GRID_GRAPHIC_SIZE_X 7
+#define GAME_GRID_GRAPHIC_SIZE_Y 6
 
 
 /// @brief Structure représentant la scène du menu principal du jeu.
@@ -24,27 +24,49 @@ typedef struct GameGraphics
     Vec2 m_padding;
     Vec2 m_spacing;
 
-    AABB m_cells[GAME_GRID_SIZE_Y][GAME_GRID_SIZE_X];
+    AABB m_cells[GAME_GRID_GRAPHIC_SIZE_Y][GAME_GRID_GRAPHIC_SIZE_X];
 
-    /*
-    AABB m_cells_2[1][3];
-    AABB m_gridAABB_2; 
-    */
+    
+    AABB m_cells_top[1][1];
+    AABB m_gridAABB_top;
+
+    AABB m_cells_left[1][1];
+    AABB m_gridAABB_left;
+
+    AABB m_cells_right[1][1];
+    AABB m_gridAABB_right;
+
+    AABB m_cells_bottom[1][1];
+    AABB m_gridAABB_bottom;
+
+    AABB m_cells_center[1][1];
+    AABB m_gridAABB_center;
+
+    AABB m_cells_bottom_bottom[1][1];
+    AABB m_gridAABB_bottom_bottom;
+    
 
     int m_selectedRowIndex;
     int m_selectedColIndex;
 
     SpriteGroup* m_spriteBox;
     SpriteGroup* m_spriteKey;
-    SpriteGroup* m_spriteFantome;
-    SpriteGroup* m_spritePillier;
-    SpriteGroup* m_spriteHache;
+    SpriteGroup* m_spriteGhost;
+    SpriteGroup* m_spritePillar;
+    SpriteGroup* m_spriteAxe;
     SpriteGroup* m_spriteDiamond;
-    SpriteGroup* m_spriteNain;
+    SpriteGroup* m_spriteCube;
+    SpriteGroup* m_spriteCube_base;
     SpriteGroup* m_spriteStone;
     SpriteGroup* m_spriteDoor;
 
-    Plateau* plateau;
+    SpriteGroup* m_spriteCube_key;
+    SpriteGroup* m_spriteCube_axe;
+    SpriteGroup* m_spriteCube_axe_key;
+
+    SpriteGroup* m_spriteMedal;
+
+    Plateau plateau;
 
     bool m_enabled;
 } GameGraphics;

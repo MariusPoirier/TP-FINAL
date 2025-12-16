@@ -8,7 +8,7 @@
 
 #include "settings.h"
 #include "plateau/plateau.h"
-#include "solver/solver.h"
+//#include "solver/solver.h"
 #include "game/input.h"
 
 #define GAME_GRID_SIZE 5
@@ -16,7 +16,7 @@
 typedef struct GameCore
 {
     Plateau plateau;
-    Input *input;
+    Input* input;
 } GameCore;
 
 
@@ -26,7 +26,7 @@ void GameCore_Create();
 /// @brief initialise un tour.
 void GameCore_Loop(Plateau plateau);
 /// @brief Un tour de jeu.
-void GameCore_update(Plateau *plateau);
+void GameCore_update(Plateau* plateau);
 
 /// @brief initialise un tour.
 void GameCore_Loop(Plateau plateau);
@@ -52,7 +52,7 @@ bool ASSERT_ROTA(Plateau plateau);
 /// @param plateau Le plateau de jeu
 ///
 /// @return True si la rotation est possible, False sinon
-bool GameCore_CanRotate(Plateau plateau);
+//bool GameCore_CanRotate(Plateau plateau);
 
 /// @brief Vérifie si on peut finir la partie
 /// @param plateau Le plateau de jeu
@@ -61,4 +61,4 @@ bool GameCore_CanRotate(Plateau plateau);
 bool GameCore_CanFinish(Plateau plateau);
 
 /// @brief Finis le jeu.
-void GameCore_Finish();
+//void GameCore_Finish();

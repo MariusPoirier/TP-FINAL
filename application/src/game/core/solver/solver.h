@@ -22,11 +22,11 @@ typedef struct GameHashmap
 uint16_t hash_maker(Plateau plate);
 
 
-GameHashmap *GameHashmap_create(size_t capacity);
+GameHashmap* GameHashmap_create(size_t capacity);
 
 //fonction qui doit résoudre le plateau:
 
-GameHashmap *Solver(Plateau plateau, size_t capacity);
+GameHashmap* Solver(Plateau plateau, size_t capacity);
 
 
-void Solver_print(GameHashmap *hash_map);
+void Solver_print(GameHashmap* hash_map);

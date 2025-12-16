@@ -30,62 +30,62 @@ void GameCore_update(Plateau* plateau)
     // Faudra gérer ler inputs
     char input;
     scanf("%c", &input);
-    switch(input)
+    switch (input)
     {
-        case 'q':
-            if (ASSERT_LEFT(*plateau))
-            {
-                Cube_left(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
-        case 'd':
-            if (ASSERT_RIGHT(*plateau))
-            {
-                Cube_right(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
-        case 'z':
-            if (ASSERT_BEHIND(*plateau))
-            {
-                Cube_behind(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
-        case 's':
-            if(ASSERT_FRONT(*plateau))
-            {
-                Cube_front(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
-        case 'a':
-            if (ASSERT_ROTA(*plateau))
-            {
-                Cube_rota_left(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
-        case 'e':
-            if (ASSERT_ROTA(*plateau))
-            {
-                Cube_rota_right(&plateau->cube);
-                Print_plateau(*plateau);
-                
-            }
-            break;
+    case 'q':
+        if (ASSERT_LEFT(*plateau))
+        {
+            Cube_left(&plateau->cube);
+            Print_plateau(*plateau);
 
-        default:
-            break;
-            
+        }
+        break;
+    case 'd':
+        if (ASSERT_RIGHT(*plateau))
+        {
+            Cube_right(&plateau->cube);
+            Print_plateau(*plateau);
+
+        }
+        break;
+    case 'z':
+        if (ASSERT_BEHIND(*plateau))
+        {
+            Cube_behind(&plateau->cube);
+            Print_plateau(*plateau);
+
+        }
+        break;
+    case 's':
+        if (ASSERT_FRONT(*plateau))
+        {
+            Cube_front(&plateau->cube);
+            Print_plateau(*plateau);
+
+        }
+        break;
+    case 'a':
+        if (ASSERT_ROTA(*plateau))
+        {
+            Cube_rota_left(&plateau->cube);
+            Print_plateau(*plateau);
+
+        }
+        break;
+    case 'e':
+        if (ASSERT_ROTA(*plateau))
+        {
+            Cube_rota_right(&plateau->cube);
+            Print_plateau(*plateau);
+
+        }
+        break;
+
+    default:
+        break;
+
     }
-    
+
     Plateau_update(plateau);
 }
 
@@ -104,43 +104,117 @@ bool GameCore_CanFinish(Plateau plateau)
     return false;
 }
 
-
+//  KEY_HOLE, AXE, SHIELD, BACKPACK, FACE, HEAD
+//  NOTHING, BOX, PILLAR, DIAMOND, DOWN_AXE, DOWN_KEY,GHOST, END
 
 bool ASSERT_LEFT(Plateau plateau)
 {
-    if (plateau.cube.j == 0) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)-1].value == PILLAR) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)-1].value == BOX) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)-1].value == GHOST) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)].value == DOWN_AXE && plateau.cube.left != AXE) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)-1].value == DIAMOND && plateau.cube.left != KEY_HOLE && plateau.cube.key == false) return false;
+    int value_left = plateau.board[plateau.cube.i][(plateau.cube.j) - 1].value;
+    //printf("value left = %d\n", value_left);
+
+    if (plateau.cube.j == 0)
+    {
+        return false;
+    }
+    if (value_left == NOTHING || value_left == END){
+        return true;
+    }
+    if (value_left == DIAMOND && plateau.cube.key == false && plateau.cube.left == KEY_HOLE)
+    {
+        return true;
+    }
+    if (value_left == DOWN_KEY && plateau.cube.key == false)
+    {
+        return true;
+    }
+    if (value_left == DOWN_AXE && plateau.cube.axe == false)
+    {
+        return true;
+    }
+
+    return false;
 }
 bool ASSERT_RIGHT(Plateau plateau)
 {
-    if (plateau.cube.j == 4) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)+1].value == PILLAR) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)+1].value == BOX) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)+1].value == GHOST) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)+1].value == DOWN_AXE && plateau.cube.right != AXE) return false;
-    if (plateau.board[plateau.cube.i][(plateau.cube.j)+1].value == DIAMOND && plateau.cube.right != KEY_HOLE && plateau.cube.key == false) return false;
+    int value_right = plateau.board[plateau.cube.i][(plateau.cube.j) + 1].value;
+    //printf("value right = %d\n", value_right);
+
+    if (plateau.cube.j == 4)
+    {
+        return false;
+    }
+    if (value_right == NOTHING || value_right == END)
+    {
+        return true;
+    }
+    if (value_right == DIAMOND && plateau.cube.key == false && plateau.cube.right == KEY_HOLE)
+    {
+        return true;
+    }
+    if (value_right == DOWN_KEY && plateau.cube.key == false)
+    {
+        return true;
+    }
+    if (value_right == DOWN_AXE && plateau.cube.axe == false)
+    {
+        return true;
+    }
+
+    return false;
 }
 bool ASSERT_BEHIND(Plateau plateau)
 {
-    if (plateau.cube.i == 0) return false;
-    if (plateau.board[plateau.cube.i-1][(plateau.cube.j)].value == PILLAR) return false;
-    if (plateau.board[plateau.cube.i-1][(plateau.cube.j)].value == BOX) return false;
-    if (plateau.board[plateau.cube.i-1][(plateau.cube.j)].value == GHOST) return false;
-    if (plateau.board[plateau.cube.i-1][(plateau.cube.j)].value == DOWN_AXE && plateau.cube.behind != AXE) return false;
-    if (plateau.board[plateau.cube.i-1][(plateau.cube.j)].value == DIAMOND && plateau.cube.behind != KEY_HOLE && plateau.cube.key == false) return false;
+    int value_behind = plateau.board[plateau.cube.i - 1][(plateau.cube.j)].value;
+    //printf("value top = %d\n", value_behind);
+    if (plateau.cube.i == 0)
+    {
+        return false;
+    }
+    if (value_behind == NOTHING || value_behind == END)
+    {
+        return true;
+    }
+    if (value_behind == DIAMOND && plateau.cube.key == false && plateau.cube.behind == KEY_HOLE)
+    {
+        return true;
+    }
+    if (value_behind == DOWN_KEY && plateau.cube.key == false)
+    {
+        return true;
+    }
+    if (value_behind == DOWN_AXE && plateau.cube.axe == false)
+    {
+        return true;
+    }
+
+    return false;
 }
 bool ASSERT_FRONT(Plateau plateau)
 {
-    if (plateau.cube.i == 3) return false;
-    if (plateau.board[plateau.cube.i+1][(plateau.cube.j)].value == PILLAR) return false;
-    if (plateau.board[plateau.cube.i+1][(plateau.cube.j)].value == BOX) return false;
-    if (plateau.board[plateau.cube.i+1][(plateau.cube.j)].value == GHOST) return false;
-    if (plateau.board[plateau.cube.i+1][(plateau.cube.j)].value == DOWN_AXE && plateau.cube.front != AXE) return false;
-    if (plateau.board[plateau.cube.i+1][(plateau.cube.j)].value == DIAMOND && plateau.cube.front != KEY_HOLE && plateau.cube.key == false) return false;
+    int value_front = plateau.board[plateau.cube.i + 1][(plateau.cube.j)].value;
+    //printf("value bot = %d\n", value_front);
+    if (plateau.cube.i == 3)
+    {
+        return false;
+    }
+    if (value_front == NOTHING || value_front == END)
+    {
+        return true;
+    }
+    if (value_front == DIAMOND && plateau.cube.key == false && plateau.cube.front == KEY_HOLE)
+    {
+        return true;
+    }
+    if (value_front == DOWN_KEY && plateau.cube.key == false)
+    {
+        return true;
+    }
+    if (value_front == DOWN_AXE && plateau.cube.axe == false)
+    {
+        return true;
+    }
+
+    return false;    
 }
 
 bool ASSERT_ROTA(Plateau plateau)
@@ -148,29 +222,29 @@ bool ASSERT_ROTA(Plateau plateau)
     int i = plateau.cube.i;
     int j = plateau.cube.j;
     if (plateau.cube.under != SHIELD) return false;
-        //vérifier qu'il y a pas de boite ('b') autour
+    //vérifier qu'il y a pas de boite ('b') autour
     if (i - 1 >= 0)
     {
-        if (plateau.board[i][j].value == BOX)
+        if (plateau.board[i-1][j].value == BOX)
             return false;
     }
     if (i - 1 < 4)
     {
-        if (plateau.board[i][j].value == BOX)
+        if (plateau.board[i+1][j].value == BOX)
             return false;
     }
     if (j - 1 >= 0)
     {
-        if (plateau.board[i][j].value == BOX)
+        if (plateau.board[i][j-1].value == BOX)
             return false;
     }
     if (j + 1 < 5)
     {
-        if (plateau.board[i][j].value == BOX)
+        if (plateau.board[i][j+1].value == BOX)
             return false;
     }
-        return true;
- 
+    return true;
+
 }
 
 
@@ -178,7 +252,7 @@ bool ASSERT_ROTA(Plateau plateau)
 
 void GameCore_Start()
 {
-   
+
     printf("Bonjour et bienvenue dans Rok passe partout !\n");
     printf("Preparer vous à jouer à un jeu dejanter\n");
     printf("Voulez vous commencez ? (Yes : y ou No : n)\n");
@@ -284,7 +358,7 @@ void GameCore_update(Plateau plateau)
         }
         // Déplacement vers la droite
         break;
-    
+
     case 'e':
         printf("Vous avez choisi de tourner vers la droite\n");
         a = GameCore_CanRotate(plateau);
@@ -303,11 +377,11 @@ void GameCore_update(Plateau plateau)
         }
         // Rotation vers la gauche
         break;
-    
+
     default:
         break;
     }
-    
+
 }
 
 void GameCore_Init_turn(Plateau *plateau)
@@ -407,12 +481,13 @@ bool GameCore_CanRotate(Plateau plateau)
     }
 }
 
-bool GameCore_CanFinish(Plateau* plateau)
+
+bool GameCore_CanFinish(Plateau plateau)
 {
-    if(plateau->cube->i == 0 && plateau->cube->j == 2)
-    if (plateau->cube->behind->code == 5) // il a la tete devant la porte
+    if(plateau.cube.i == 0 && plateau.cube.j == 2)
+    if (plateau.cube.behind == HEAD) // il a la tete devant la porte
     {
-        if (Cube_key(plateau->cube) == true)
+        if (Cube_key(plateau.cube) == true)
         {
             return true;
         }

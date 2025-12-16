@@ -10,7 +10,7 @@
 #include "game/ui/game_ui_manager.h"
 
 typedef struct Scene Scene;
-typedef struct GameUiPage
+typedef struct GameUiSolverPage
 {
     Scene* m_scene;
     GameUIManager* m_manager;
@@ -21,8 +21,8 @@ typedef struct GameUiPage
 
     GameUIAction m_nextAction;
     UIObject* m_mainPanel;
-} GameUiPage;
+} GameUiSolverPage;
 
-GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager);
-void GameUiPage_destroy(GameUiPage* self);
-void GameUiPage_update(GameUiPage* self, UIInput* input);
+GameUiSolverPage* GameUiSolverPage_create(Scene* scene, GameUIManager* manager);
+void GameUiSolverPage_destroy(GameUiSolverPage* self);
+void GameUiSolverPage_update(GameUiSolverPage* self, UIInput* input);

@@ -11,6 +11,10 @@
 #include "game/input.h"
 #include "game/scene.h"
 
+
+#include "game/core/plateau/plateau.h"
+#include "game/core/character/cube.h"
+
 #include <SDL3/SDL_main.h>
 
 
@@ -24,6 +28,8 @@
 #define LOGICAL_WIDTH  FHD_WIDTH
 #define LOGICAL_HEIGHT FHD_HEIGHT
 
+
+//*/
 int main(int argc, char* argv[])
 {
     //--------------------------------------------------------------------------
@@ -87,3 +93,15 @@ int main(int argc, char* argv[])
 
     return EXIT_SUCCESS;
 }
+//*/
+
+
+/*/
+int main()
+{
+    GameCore_Start();
+
+    return 0;
+}
+//*/
+

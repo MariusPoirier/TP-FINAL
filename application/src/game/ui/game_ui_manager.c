@@ -5,6 +5,8 @@
 */
 
 #include "game/ui/game_ui_manager.h"
+#include "game/ui/game_ui_game.h"
+#include "game/ui/game_ui_solver.h"
 #include "game/ui/game_title_page.h"
 #include "game/ui/game_settings_page.h"
 #include "game/scene.h"
@@ -41,9 +43,14 @@ static void GameUIManager_closePages(GameUIManager* self)
 {
     GameTitlePage_destroy(self->m_mainPage);
     GameSettingsPage_destroy(self->m_settingsPage);
+    GameUiPage_destroy(self->m_gameUiPage);
+    GameUiSolverPage_destroy(self->m_gameUiSolverPage);
 
+    g_gameConfig.inLevel = false;
     self->m_mainPage = NULL;
     self->m_settingsPage = NULL;
+    self->m_gameUiPage = NULL;
+    self->m_gameUiSolverPage = NULL;
 }
 
 void GameUIManager_update(GameUIManager* self, UIInput* input)
@@ -57,6 +64,14 @@ void GameUIManager_update(GameUIManager* self, UIInput* input)
     if (self->m_settingsPage)
     {
         GameSettingsPage_update(self->m_settingsPage, input);
+    }
+    if (self->m_gameUiPage)
+    {
+        GameUiPage_update(self->m_gameUiPage, input);
+    }
+    if (self->m_gameUiSolverPage)
+    {
+        GameUiSolverPage_update(self->m_gameUiSolverPage, input);
     }
 
     if (self->m_nextAction != GAME_UI_ACTION_NONE)
@@ -76,6 +91,20 @@ void GameUIManager_update(GameUIManager* self, UIInput* input)
         case GAME_UI_ACTION_START:
             GameUIManager_closePages(self);
             g_gameConfig.inLevel = true;
+            self->m_gameUiPage = GameUiPage_create(scene, self);
+            GameGraphics_setEnabled(scene->m_gameGraphics, true);
+            break;
+        case GAME_UI_ACTION_SHOW_SOLUTION:
+            GameUIManager_closePages(self);
+            g_gameConfig.inLevel = true;
+            self->m_gameUiSolverPage = GameUiSolverPage_create(scene, self);
+            GameGraphics_setEnabled(scene->m_gameGraphics, false);
+            break;
+
+        case GAME_UI_ACTION_HIDE_SOLUTION:
+            GameUIManager_closePages(self);
+            g_gameConfig.inLevel = true;
+            self->m_gameUiPage = GameUiPage_create(scene, self);
             GameGraphics_setEnabled(scene->m_gameGraphics, true);
             break;
         }

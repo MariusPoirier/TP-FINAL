@@ -19,12 +19,12 @@ uint16_t hash_maker(Plateau plateau)
     hash ^= (uint64_t)plateau.cube.key;
     hash = hash * 0xbf58476d1ce4e5b9ULL + 0x9e3779b97f4a7c15ULL;
     return hash;
-    
+
 }
 
-GameHashmap *GameHashmap_create(size_t capacity)
+GameHashmap* GameHashmap_create(size_t capacity)
 {
-    GameHashmap *hash_map = (GameHashmap*)calloc(1, sizeof(GameHashmap));
+    GameHashmap* hash_map = (GameHashmap*)calloc(1, sizeof(GameHashmap));
     AssertNew(hash_map);
     hash_map->m_size = 0;
     hash_map->m_capacity = capacity;
@@ -52,7 +52,7 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
 
     plateau_w = hash_map->m_entries[i_origin].currState;
 
-    while (i_origin!=i_working)
+    while (i_origin != i_working)
     {
         plateau_w = hash_map->m_entries[i_origin].currState;
         if (ASSERT_LEFT(plateau_w))
@@ -95,11 +95,11 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
                 entry.id_prev = i_origin;
                 hash_map->m_idMap[hash % capacity] = i_working;
                 hash_map->m_entries[i_working] = entry;
-                i_working++ ;
+                i_working++;
             }
         }
         plateau_w = hash_map->m_entries[i_origin].currState;
-        if(ASSERT_FRONT(plateau_w))
+        if (ASSERT_FRONT(plateau_w))
         {
 
             Cube_front(&plateau_w.cube);
@@ -169,24 +169,31 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
         i_origin++;
     }
     Solver_print(hash_map);
+    //printf("test : %d", hash_map->m_size);
+    
     //Solver_print(hash_map);
 }
 
 
-void Solver_print(GameHashmap *hash_map)
+void Solver_print(GameHashmap* hash_map)
 {
     int index = 0;
+    size_t res = 0;
     int index_desc;
     while (!GameCore_CanFinish(hash_map->m_entries[index].currState))
         index++;
     Print_plateau(hash_map->m_entries[index].currState);
     while (index != 0)
     {
+        //hash_map->m_size ++;
+        //res++;
         printf("\n");
         index = hash_map->m_entries[index].id_prev;
         Print_plateau(hash_map->m_entries[index].currState);
     }
-    
+    //printf("res = %d", res);
+    hash_map->m_size = res;
+
 }
 
 /*
@@ -310,11 +317,11 @@ void Solver(Plateau plateau, size_t capacity)
             }
 
         }
-        
+
     }
     printf("SAUCIISSSSSSSSSE");
 
-    
+
 }
 
 */

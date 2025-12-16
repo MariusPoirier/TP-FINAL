@@ -2,7 +2,9 @@
 
 #include "settings.h"
 typedef enum Face_Value
-{ KEY_HOLE, AXE, SHIELD, BACKPACK, FACE, HEAD }
+{
+    KEY_HOLE, AXE, SHIELD, BACKPACK, FACE, HEAD
+}
 Face_Value;
 
 
@@ -19,7 +21,7 @@ typedef struct Cube
     bool axe;
     bool key;
 
-    int i,j;
+    int i, j;
 
 } Cube;
 
@@ -33,22 +35,21 @@ Cube Cube_create();
 
 void Cube_print(Cube cube);
 
-void Cube_rota_right(Cube *cube);
-void Cube_rota_left(Cube *cube);
+void Cube_rota_right(Cube* cube);
+void Cube_rota_left(Cube* cube);
 
-void Cube_left(Cube *cube);
-void Cube_behind(Cube *cube);
-void Cube_right(Cube *cube);
-void Cube_front(Cube *cube);
+void Cube_left(Cube* cube);
+void Cube_behind(Cube* cube);
+void Cube_right(Cube* cube);
+void Cube_front(Cube* cube);
 
 int getCubeI(Cube cube);
 int getCubeJ(Cube cube);
 
-void Cube_SetNorth(Cube *cube);
-void Cube_SetWest(Cube *cube);
-void Cube_SetEast(Cube *cube);
-
-void Cube_SetSouth(Cube *cube);
+void Cube_SetNorth(Cube* cube);
+void Cube_SetWest(Cube* cube);
+void Cube_SetEast(Cube* cube);
+void Cube_SetSouth(Cube* cube);
 
 
 /// @brief Dis si le cube à la hache.

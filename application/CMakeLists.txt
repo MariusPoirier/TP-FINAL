@@ -33,17 +33,17 @@ target_sources(${NAME} PRIVATE
     "src/game/ui/game_settings_page.h"
     "src/game/ui/game_ui_game.c"
     "src/game/ui/game_ui_game.h"
-    "src/game/core/charactere/cube.c"
-    "src/game/core/charactere/cube.h"
-    "src/game/core/plateau/plateau.c"
-    "src/game/core/plateau/plateau.h"
     "src/game/game_graphics.h"
     "src/game/game_graphics.c"
     "src/game/core/game_core.c"
     "src/game/core/game_core.h"
+    "src/game/core/character/cube.c"
+    "src/game/core/character/cube.h"
+    "src/game/core/character/cube.h"
+    "src/game/core/plateau/plateau.c"
+    "src/game/core/plateau/plateau.h"
     "src/game/game_config.c"
-    "src/game/game_config.h"
-)
+    "src/game/game_config.h" "src/game/core/solver/solver.h" "src/game/core/solver/solver.c" "src/game/ui/game_ui_solver.c" "src/game/ui/game_ui_solver.h")
 
 find_library(MATH_LIBRARY m)
 if(MATH_LIBRARY)

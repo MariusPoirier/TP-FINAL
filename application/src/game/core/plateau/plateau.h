@@ -29,6 +29,7 @@ Plateau Plateau_create();
 
 Plateau Plateau_1();
 Plateau Plateau_2();
+Plateau Plateau_3();
 /// @brief Affiche le plateau.
 /// 
 /// @param plate le plateau à afficher.

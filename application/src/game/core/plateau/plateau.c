@@ -22,9 +22,12 @@ Plateau Plateau_create()
 Plateau Plateau_1()
 {
     Plateau plateau = Plateau_create();
+    plateau.cube = Cube_create();
 
     plateau.cube.i = 3;
     plateau.cube.j = 0;
+
+
     plateau.board[2][0].value = PILLAR;
     plateau.board[2][1].value = PILLAR;
     plateau.board[2][2].value = PILLAR;
@@ -41,9 +44,11 @@ Plateau Plateau_1()
 Plateau Plateau_2()
 {
     Plateau plateau = Plateau_create();
+    plateau.cube = Cube_create();
 
     plateau.cube.i = 0;
     plateau.cube.j = 3;
+
     Cube_SetWest(&plateau.cube);
     plateau.board[0][1].value = DIAMOND;
     plateau.board[1][0].value = DIAMOND;
@@ -55,9 +60,27 @@ Plateau Plateau_2()
     plateau.board[3][1].value = PILLAR;
     plateau.board[3][3].value = BOX;
 
+    return plateau;
+}
 
+Plateau Plateau_3()
+{
+    Plateau plateau = Plateau_create();
+    plateau.cube = Cube_create();
 
+    plateau.cube.i = 0;
+    plateau.cube.j = 3;
+    Cube_SetWest(&plateau.cube);
 
+    plateau.board[0][1].value = DIAMOND;
+    plateau.board[1][0].value = DIAMOND;
+    plateau.board[1][1].value = DOWN_AXE;
+    plateau.board[1][2].value = GHOST;
+    plateau.board[1][3].value = PILLAR;
+    plateau.board[2][0].value = DIAMOND;
+    plateau.board[2][3].value = DIAMOND;
+    plateau.board[3][1].value = PILLAR;
+    plateau.board[3][3].value = BOX;
 
     return plateau;
 }
@@ -112,8 +135,9 @@ void Print_plateau(Plateau plateau)
 
 void Plateau_update(Plateau* plateau)
 {
+    //printf("IS HAVE KEY ?%d", plateau->cube.key);
 
-    // Il faur remove clé hache et fantôme;
+    // Il faut remove clé hache et fantôme;
     if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_KEY)
     {
         plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
@@ -125,6 +149,7 @@ void Plateau_update(Plateau* plateau)
         plateau->cube.axe = true;
         Plateau_search_ghost(plateau);
     }
+    
 }
 
 void Plateau_search_ghost(Plateau* plateau)
@@ -147,7 +172,7 @@ bool Plateau_even(Plateau plateau1, Plateau plateau2)
     if (plateau1.cube.left != plateau2.cube.left) return true;
     if (plateau1.cube.i != plateau2.cube.i) return true;
     if (plateau1.cube.j != plateau2.cube.j) return true;
-    if (plateau1.cube.axe!= plateau2.cube.axe) return true;
+    if (plateau1.cube.axe != plateau2.cube.axe) return true;
     if (plateau1.cube.key != plateau2.cube.key) return true;
 
 }
