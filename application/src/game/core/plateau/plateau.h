@@ -30,6 +30,11 @@ Plateau Plateau_create();
 Plateau Plateau_1();
 Plateau Plateau_2();
 Plateau Plateau_3();
+Plateau Plateau_4();
+Plateau Plateau_5();
+Plateau Plateau_6();
+Plateau Plateau_7();
+
 /// @brief Affiche le plateau.
 /// 
 /// @param plate le plateau à afficher.
@@ -41,3 +46,5 @@ void Plateau_update(Plateau *plateau);
 void Plateau_search_ghost(Plateau* plateau);
 
 bool Plateau_even(Plateau plateau1, Plateau plateau2);
+
+Plateau Plateau_copy(Plateau plateau);

@@ -8,6 +8,7 @@
 
 #include "settings.h"
 #include "game/ui/game_ui_manager.h"
+#include "game/core/solver/solver.h"
 
 typedef struct Scene Scene;
 typedef struct GameUiSolverPage
@@ -21,6 +22,10 @@ typedef struct GameUiSolverPage
 
     GameUIAction m_nextAction;
     UIObject* m_mainPanel;
+    GameHashmap* hash_map;
+    size_t index;
+    size_t base_index;
+
 } GameUiSolverPage;
 
 GameUiSolverPage* GameUiSolverPage_create(Scene* scene, GameUIManager* manager);

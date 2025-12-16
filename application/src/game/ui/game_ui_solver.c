@@ -51,6 +51,14 @@ GameUiSolverPage* GameUiSolverPage_create(Scene* scene, GameUIManager* manager)
     self->m_focusManager = UIFocusManager_create();
     UIFocusManager_setCanvas(self->m_focusManager, canvas);
 
+    // HASH MAP
+    self->hash_map = GameHashmap_create(10000);
+    self->hash_map = Solver(self->m_scene->m_gameGraphics->plateau, self->hash_map->m_capacity);
+    self->hash_map->cube_index = self->hash_map->m_size;
+    self->index = self->hash_map->m_idMap;
+    self->base_index = self->index;
+
+
     UIObject_setParent(self->m_mainPanel, canvas);
     rect.anchorMin = Vec2_set(0.15f, 0.0f);
     rect.anchorMax = Vec2_set(0.3f, 1.0f);
@@ -193,26 +201,71 @@ void GameUiSolverPage_update(GameUiSolverPage* self, UIInput* input)
         self->m_manager->m_nextAction = GAME_UI_ACTION_OPEN_MAIN;
         break;
     case GAME_UI_ACTION_QUIT:
+        self->m_scene->m_gameGraphics->plateau = Plateau_copy(self->hash_map->m_entries[self->base_index].currState);
+        self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
+        self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;
         self->m_manager->m_nextAction = GAME_UI_ACTION_START;
         break;
+
     case GAME_UI_ACTION_PREV_STEP:
         printf("Previous step\n");
-        self->m_scene->m_gameGraphics->m_selectedColIndex += 1;
+        if (self->m_scene->m_gameGraphics->m_selectedRowIndex == 0 && self->m_scene->m_gameGraphics->m_selectedColIndex == 3)
+        {
+            printf("L'index du cube est : %d \n", self->hash_map->cube_index);
+            int i_0 = self->hash_map->m_entries[self->index].currState.cube.i;
+            int j_0 = self->hash_map->m_entries[self->index].currState.cube.j;
+            printf("i = %d et j = %d", i_0, j_0);
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = i_0 + 1;
+            self->m_scene->m_gameGraphics->m_selectedColIndex = j_0 + 1;
+            Plateau_update(&self->m_scene->m_gameGraphics->plateau);
+        }
+        else if (self->hash_map->cube_index < self->hash_map->m_size)
+        {
+            self->hash_map->cube_index += 1;
+
+            self->index = self->hash_map->m_entries[self->index].id_prev;
+            //Print_plateau(self->hash_map->m_entries[self->index].currState);
+            self->m_scene->m_gameGraphics->plateau = Plateau_copy(self->hash_map->m_entries[self->index].currState);
+
+            int i = self->hash_map->m_entries[self->index].currState.cube.i;
+            int j = self->hash_map->m_entries[self->index].currState.cube.j;
+            printf("L'index du cube est : %d \n", self->hash_map->cube_index);
+            printf("i = %d et j = %d",i , j);
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = i + 1;
+            self->m_scene->m_gameGraphics->m_selectedColIndex = j + 1;
+            //printf("test key %d", self->m_scene->m_gameGraphics->plateau.board[i][j]);
+        }
         break;
     case GAME_UI_ACTION_NEXT_STEP:
         printf("Next step\n");
-        self->m_scene->m_gameGraphics->m_selectedColIndex -= 1;
+        if (self->hash_map->cube_index > 0)
+        {
+            self->hash_map->cube_index -= 1;
+
+            self->index = self->hash_map->m_entries[self->index].id_next;
+            //Print_plateau(self->hash_map->m_entries[self->index].currState);
+            self->m_scene->m_gameGraphics->plateau = Plateau_copy(self->hash_map->m_entries[self->index].currState);
+
+            int i_2 = self->hash_map->m_entries[self->index].currState.cube.i;
+            int j_2 = self->hash_map->m_entries[self->index].currState.cube.j;
+            printf("L'index du cube est : %d \n", self->hash_map->cube_index);
+            printf("i = %d et j = %d", i_2, j_2);
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = i_2 + 1;
+            self->m_scene->m_gameGraphics->m_selectedColIndex = j_2 + 1;
+        }
+        else if (self->hash_map->cube_index == 0)
+        {
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = 0;
+            self->m_scene->m_gameGraphics->m_selectedColIndex = 3;
+        }
         break;
     case GAME_UI_ACTION_SHOW_SOLUTION:
-        GameHashmap *hash_map = GameHashmap_create(10000);
-        Solver(self->m_scene->m_gameGraphics->plateau, hash_map->m_capacity);
-
-        printf("Le nombre de coup est de : %d \n", hash_map->m_size);
+        
+        printf("L'index du cube est : %d \n", self->hash_map->cube_index);
         printf("Generate level button clicked\n");
         break;
     case GAME_UI_ACTION_APPLY_LEVEL:
     {
-
         int itemIndex = UIList_getSelectedItem(self->m_LevelList);
         printf("Selected level difficulty: %d\n", itemIndex);
         if (itemIndex == 0)

@@ -43,7 +43,7 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
     size_t i_origin = 0;
     size_t i_working = 1;
     GameHashmap* hash_map = GameHashmap_create(capacity);
-    GameHashmapEntry entry = { -1, plateau };
+    GameHashmapEntry entry = { -1, plateau , -1};
     Plateau plateau_w;
     uint64_t hash;
 
@@ -169,6 +169,7 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
         i_origin++;
     }
     Solver_print(hash_map);
+    return hash_map;
     //printf("test : %d", hash_map->m_size);
     
     //Solver_print(hash_map);
@@ -178,20 +179,35 @@ GameHashmap* Solver(Plateau plateau, size_t capacity)
 void Solver_print(GameHashmap* hash_map)
 {
     int index = 0;
+    int index_cube = 0;
     size_t res = 0;
     int index_desc;
     while (!GameCore_CanFinish(hash_map->m_entries[index].currState))
-        index++;
+        index++;    
     Print_plateau(hash_map->m_entries[index].currState);
     while (index != 0)
     {
         //hash_map->m_size ++;
-        //res++;
+        res++;
+        index_cube ++;
         printf("\n");
+
+        size_t temp = index;
+
         index = hash_map->m_entries[index].id_prev;
+
+        hash_map->m_entries[index].id_next = temp;
+        printf("index test = %d\n", hash_map->m_entries[index].id_next);
+
         Print_plateau(hash_map->m_entries[index].currState);
+        printf("la face en ce moment est %d\n", hash_map->m_entries[index].currState.cube.over);
+
+        hash_map->m_idMap = index;
+        printf("index = %d et index_next = %d \n", index, hash_map->m_entries[index].id_next);
+        printf("index = %d et index_prev = %d \n", index, hash_map->m_entries[index].id_prev);
     }
     //printf("res = %d", res);
+    
     hash_map->m_size = res;
 
 }

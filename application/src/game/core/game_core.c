@@ -123,11 +123,11 @@ bool ASSERT_LEFT(Plateau plateau)
     {
         return true;
     }
-    if (value_left == DOWN_KEY && plateau.cube.key == false)
+    if (value_left == DOWN_KEY && plateau.cube.key == false && plateau.cube.left == KEY_HOLE)
     {
         return true;
     }
-    if (value_left == DOWN_AXE && plateau.cube.axe == false)
+    if (value_left == DOWN_AXE && plateau.cube.axe == false && plateau.cube.left == AXE)
     {
         return true;
     }
@@ -151,11 +151,11 @@ bool ASSERT_RIGHT(Plateau plateau)
     {
         return true;
     }
-    if (value_right == DOWN_KEY && plateau.cube.key == false)
+    if (value_right == DOWN_KEY && plateau.cube.key == false && plateau.cube.right == KEY_HOLE)
     {
         return true;
     }
-    if (value_right == DOWN_AXE && plateau.cube.axe == false)
+    if (value_right == DOWN_AXE && plateau.cube.axe == false && plateau.cube.right == AXE)
     {
         return true;
     }
@@ -178,11 +178,11 @@ bool ASSERT_BEHIND(Plateau plateau)
     {
         return true;
     }
-    if (value_behind == DOWN_KEY && plateau.cube.key == false)
+    if (value_behind == DOWN_KEY && plateau.cube.key == false && plateau.cube.behind == KEY_HOLE)
     {
         return true;
     }
-    if (value_behind == DOWN_AXE && plateau.cube.axe == false)
+    if (value_behind == DOWN_AXE && plateau.cube.axe == false && plateau.cube.behind == AXE)
     {
         return true;
     }
@@ -205,11 +205,11 @@ bool ASSERT_FRONT(Plateau plateau)
     {
         return true;
     }
-    if (value_front == DOWN_KEY && plateau.cube.key == false)
+    if (value_front == DOWN_KEY && plateau.cube.key == false && plateau.cube.front == KEY_HOLE)
     {
         return true;
     }
-    if (value_front == DOWN_AXE && plateau.cube.axe == false)
+    if (value_front == DOWN_AXE && plateau.cube.axe == false && plateau.cube.front == AXE)
     {
         return true;
     }
@@ -222,27 +222,41 @@ bool ASSERT_ROTA(Plateau plateau)
     int i = plateau.cube.i;
     int j = plateau.cube.j;
     if (plateau.cube.under != SHIELD) return false;
+    //printf("test rota\n");
     //vérifier qu'il y a pas de boite ('b') autour
-    if (i - 1 >= 0)
+    if (i - 1 > 0)
     {
-        if (plateau.board[i-1][j].value == BOX)
+        if (plateau.board[i - 1][j].value == BOX)
+        {
+            //printf("test rota 1\n");
             return false;
+        }
     }
-    if (i - 1 < 4)
+    if (i + 1 < 4)
     {
-        if (plateau.board[i+1][j].value == BOX)
+        if (plateau.board[i + 1][j].value == BOX)
+        {
+            //printf("test rota 2\n");
             return false;
+        }
     }
-    if (j - 1 >= 0)
+    if (j - 1 > 0)
     {
-        if (plateau.board[i][j-1].value == BOX)
+        if (plateau.board[i][j - 1].value == BOX)
+        {
+            //printf("test rota 3\n");
             return false;
+        }
     }
     if (j + 1 < 5)
     {
-        if (plateau.board[i][j+1].value == BOX)
+        if (plateau.board[i][j + 1].value == BOX)
+        {
+            //printf("test rota 4\n");
             return false;
+        }
     }
+    //printf("test rotation\n");
     return true;
 
 }

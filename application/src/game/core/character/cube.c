@@ -29,21 +29,19 @@ void Cube_print(Cube cube)
 void Cube_rota_right(Cube* cube)
 {
     Face_Value temp = cube->left;
-    cube->left = cube->behind;
-    cube->behind = cube->right;
-    cube->right = cube->front;
-    cube->front = temp;
-
+    cube->left = cube->front;
+    cube->front = cube->right;
+    cube->right = cube->behind;
+    cube->behind = temp;
 }
 
 void Cube_rota_left(Cube* cube)
 {
     Face_Value temp = cube->left;
-    cube->left = cube->front;
-    cube->front = cube->right;
-    cube->right = cube->behind;
-    cube->behind = temp;
-
+    cube->left = cube->behind;
+    cube->behind = cube->right;
+    cube->right = cube->front;
+    cube->front = temp;
 }
 
 void Cube_left(Cube* cube)
@@ -105,12 +103,12 @@ void Cube_SetNorth(Cube* cube)
 
 void Cube_SetWest(Cube* cube)
 {
-    Cube_rota_left(cube);
+    Cube_rota_right(cube);
 }
 
 void Cube_SetEast(Cube* cube)
 {
-    Cube_rota_right(cube);
+    Cube_rota_left(cube);
 }
 
 void Cube_SetSouth(Cube* cube)

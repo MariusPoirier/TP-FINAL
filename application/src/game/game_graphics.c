@@ -47,7 +47,7 @@ GameGraphics* GameGraphics_create(Scene* scene)
     self->m_gridAABB_bottom_bottom.upper = Vec2_add(Vec2_set(+0.3f, +0.3f), Vec2_set(3.6f, 4.2f));
     
 
-    self->plateau = Plateau_2();
+    self->plateau = Plateau_1();
     Print_plateau(self->plateau);
     self->m_selectedColIndex = self->plateau.cube.j + 1;
     self->m_selectedRowIndex = self->plateau.cube.i + 1;

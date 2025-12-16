@@ -79,7 +79,7 @@ GameUiPage* GameUiPage_create(Scene* scene, GameUIManager* manager)
 
     font = AssetManager_getFont(assets, FONT_NORMAL);
 
-    const char* toggleItems[] = { "Easy", "Medium" , "Hard" };
+    const char* toggleItems[] = { " Very Easy", "Easy" , "Normal" ,"Medium" , "Hard" ,"Very Hard","Impossible"};
     const int toggleItemCount = sizeof(toggleItems) / sizeof(toggleItems[0]);
 
     
@@ -224,6 +224,42 @@ void GameUiPage_update(GameUiPage* self, UIInput* input)
         {
             self->m_manager->m_nextAction = GAME_UI_ACTION_GENERATE_LEVEL_HARD;
             self->m_scene->m_gameGraphics->plateau = Plateau_3();
+            Print_plateau(self->m_scene->m_gameGraphics->plateau);
+            self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;
+            self->m_scene->m_gameGraphics->m_enabled = true;
+        }
+        else if (itemIndex == 3)
+        {
+            self->m_manager->m_nextAction = GAME_UI_ACTION_GENERATE_LEVEL_HARD;
+            self->m_scene->m_gameGraphics->plateau = Plateau_4();
+            Print_plateau(self->m_scene->m_gameGraphics->plateau);
+            self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;
+            self->m_scene->m_gameGraphics->m_enabled = true;
+        }
+        else if (itemIndex == 4)
+        {
+            self->m_manager->m_nextAction = GAME_UI_ACTION_GENERATE_LEVEL_HARD;
+            self->m_scene->m_gameGraphics->plateau = Plateau_5();
+            Print_plateau(self->m_scene->m_gameGraphics->plateau);
+            self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;
+            self->m_scene->m_gameGraphics->m_enabled = true;
+        }
+        else if (itemIndex == 5)
+        {
+            self->m_manager->m_nextAction = GAME_UI_ACTION_GENERATE_LEVEL_HARD;
+            self->m_scene->m_gameGraphics->plateau = Plateau_6();
+            Print_plateau(self->m_scene->m_gameGraphics->plateau);
+            self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
+            self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;
+            self->m_scene->m_gameGraphics->m_enabled = true;
+        }
+        else if (itemIndex == 6)
+        {
+            self->m_manager->m_nextAction = GAME_UI_ACTION_GENERATE_LEVEL_HARD;
+            self->m_scene->m_gameGraphics->plateau = Plateau_7();
             Print_plateau(self->m_scene->m_gameGraphics->plateau);
             self->m_scene->m_gameGraphics->m_selectedColIndex = self->m_scene->m_gameGraphics->plateau.cube.j + 1;
             self->m_scene->m_gameGraphics->m_selectedRowIndex = self->m_scene->m_gameGraphics->plateau.cube.i + 1;

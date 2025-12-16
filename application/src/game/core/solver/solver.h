@@ -8,6 +8,7 @@ typedef struct GameHashmapEntry
 {
     size_t id_prev;
     Plateau currState;
+    size_t id_next;
 } GameHashmapEntry;
 
 
@@ -17,6 +18,7 @@ typedef struct GameHashmap
     size_t* m_idMap;
     size_t m_capacity;
     size_t m_size;
+    int cube_index;
 } GameHashmap;
 
 uint16_t hash_maker(Plateau plate);
