@@ -62,7 +62,7 @@ Plateau generation(int difficulty)
     Plateau plateau = Plateau_create();
     Print_plateau(plateau);
     Plateau test;
-    int nb_average = difficulty * 10;
+    int nb_average = 7 + difficulty * 5;
     int nb_try = -1;
 
     while (nb_try + 5 < nb_average || nb_try - 10 > nb_average)
