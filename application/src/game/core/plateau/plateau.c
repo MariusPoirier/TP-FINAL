@@ -211,7 +211,7 @@ void Plateau_update(Plateau* plateau)
     // Il faut remove clé hache et fantôme;
     if (plateau->board[plateau->cube.i][plateau->cube.j].value == DOWN_KEY)
     {
-        printf("test key picked\n");
+        //printf("test key picked\n");
         plateau->board[plateau->cube.i][plateau->cube.j].value = NOTHING;
         plateau->cube.key = true;
     }
@@ -222,6 +222,17 @@ void Plateau_update(Plateau* plateau)
         Plateau_search_ghost(plateau);
     }
     
+}
+int Plateau_count_elem(Plateau plateau)
+{
+    int count = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 5; j++)
+            if (plateau.board[i][j].value != NOTHING) count++;
+
+    }
+    return count;
 }
 
 void Plateau_search_ghost(Plateau* plateau)

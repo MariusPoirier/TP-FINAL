@@ -43,6 +43,8 @@ void Print_plateau(Plateau plateau);
 
 void Plateau_update(Plateau *plateau);
 
+
+int Plateau_count_elem(Plateau plateau);
 void Plateau_search_ghost(Plateau* plateau);
 
 bool Plateau_even(Plateau plateau1, Plateau plateau2);
